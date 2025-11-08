@@ -1,0 +1,20 @@
+[
+  {
+    "id": "gta5",
+    "name": "GTA V PC",
+    "desc": "Grand Theft Auto V - Código digital para PC",
+    "price": 21.9
+  },
+  {
+    "id": "fc25",
+    "name": "FC 25",
+    "desc": "Gift Card FC 25 - Código digital",
+    "price": 20.0
+  },
+  {
+    "id": "rdr",
+    "name": "RED DEAD REDEMPTION",
+    "desc": "Red Dead Redemption - Código digital para PC",
+    "price": 24.9
+  }
+]

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LHB Studio - Loja Digital</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo">LHB Studio</h1>
+      <nav class="nav">
+        <a href="#produtos">Produtos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h2>Jogos digitais e códigos — entrega por e-mail</h2>
+          <p>Promoções da semana — compre via Pix e receba automaticamente por e-mail quando o pagamento for confirmado.</p>
+          <a class="btn" href="#produtos">Ver produtos</a>
+        </div>
+        <div class="hero-image" aria-hidden="true">
+          <div class="placeholder">BANNER: Promoções da Semana</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="produtos" class="section container">
+      <h3>Produtos em destaque</h3>
+      <div id="grid" class="grid"></div>
+    </section>
+
+    <section id="sobre" class="section alt">
+      <div class="container">
+        <h3>Sobre</h3>
+        <p>Lojas digitais focadas em jogos, recargas e códigos com entrega automática por Pix (integração via PSP recomendada).</p>
+      </div>
+    </section>
+
+    <section id="contato" class="section container">
+      <h3>Contato</h3>
+      <p>Tem dúvidas? Envie uma mensagem.</p>
+      <form id="contactForm">
+        <input type="text" name="nome" placeholder="Seu nome" required>
+        <input type="email" name="email" placeholder="Seu email (opcional)">
+        <textarea name="mensagem" placeholder="Mensagem" required></textarea>
+        <button type="submit" class="btn">Enviar</button>
+      </form>
+      <p class="muted">Email de contato: <span id="contactEmail">seuemail@exemplo.com</span></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 LHB Studio.</p>
+    </div>
+  </footer>
+
+  <div id="pixModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); align-items:center; justify-content:center;">
+    <div style="background:#0b0d10; padding:18px; border-radius:10px; max-width:540px; color:#fff;">
+      <h3>Pagamento Pix</h3>
+      <div id="pixContent"></div>
+      <button onclick="closeModal()" class="btn" style="margin-top:12px;">Fechar</button>
+    </div>
+  </div>
+
+  <script src="client.js"></script>
+</body>
+</html>
