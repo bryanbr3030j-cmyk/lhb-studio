@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Produtos — LHB Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="glow-bg"></div>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo"><a href="index.html" style="color:inherit;text-decoration:none">LHB<span>Studio</span></a></div>
+        <div class="tag">Digital marketplace</div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="produtos.html" aria-current="page">Produtos</a>
+        <a href="index.html#contato">Contato</a>
+        <button id="cartBtn" class="cart-btn">Carrinho <span id="cartCount">0</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="section produtos" style="padding-top:36px">
+      <div class="container">
+        <h2>Produtos Disponíveis</h2>
+        <div id="grid" class="grid" aria-live="polite"></div>
+        <div id="emptyHint" style="color:var(--muted);margin-top:14px;display:none">Nenhum produto encontrado.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© 2025 LHB Studio</div>
+      <div class="footer-right">
+        <a href="https://wa.me/5591999999999" target="_blank" class="btn-ghost">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-panel">
+      <button id="closeModal" class="modal-close">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // garante que app.js carregue os produtos também aqui
+    if (typeof loadProducts === 'function') loadProducts();
+  </script>
+</body>
+</html>
