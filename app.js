@@ -1,108 +1,23 @@
-// client storefront v2 - cart + PIX simulated checkout
-const PRODUCTS_URL = 'products.json';
-
-let products = [];
-let cart = [];
-
-function $(sel){return document.querySelector(sel)}
-
-async function loadProducts(){
-  const res = await fetch(PRODUCTS_URL);
-  products = await res.json();
-  const grid = $('#grid');
-  grid.innerHTML = '';
-  products.forEach(p => {
-    const el = document.createElement('article');
-    el.className = 'card';
-    el.innerHTML = `
-      <div class="card-img">${p.name}</div>
-      <h4>${p.name}</h4>
-      <p>${p.desc || ''}</p>
-      <div class="price">R$ ${p.price.toFixed(2)}</div>
-      <div class="actions">
-        <button class="btn" onclick="addToCart('${p.id}')">Comprar</button>
-        <button class="small" onclick="preview('${p.id}')">Detalhes</button>
-      </div>
-    `;
-    grid.appendChild(el);
-  });
-}
-
-function addToCart(id){
-  const p = products.find(x=>x.id===id);
-  if(!p) return;
-  const item = cart.find(c=>c.id===id);
-  if(item) item.qty++;
-  else cart.push({id:p.id, name:p.name, price:p.price, qty:1});
-  updateCartCount();
-  openCart();
-}
-
-function updateCartCount(){
-  const total = cart.reduce((s,i)=>s+i.qty,0);
-  $('#cartCount').textContent = total;
-}
-
-function openCart(){
-  const modal = $('#modal');
-  const content = $('#modalContent');
-  modal.style.display = 'flex';
-  content.innerHTML = `<h3>Seu Carrinho</h3>`;
-  if(cart.length===0) content.innerHTML += '<p>Carrinho vazio</p>';
-  else{
-    const list = document.createElement('div');
-    cart.forEach(it=>{
-      const row = document.createElement('div');
-      row.style.display='flex'; row.style.justifyContent='space-between'; row.style.marginTop='8px';
-      row.innerHTML = `<div>${it.name} x${it.qty}</div><div>R$ ${(it.price*it.qty).toFixed(2)}</div>`;
-      list.appendChild(row);
-    });
-    content.appendChild(list);
-    const total = cart.reduce((s,i)=>s+i.qty*i.price,0);
-    content.innerHTML += `<div style="margin-top:12px;font-weight:800">Total: R$ ${total.toFixed(2)}</div>`;
-    content.innerHTML += `<div style="margin-top:12px"><button class="btn" onclick="checkout()">Pagar com PIX</button> <button class="small" onclick="clearCart()">Limpar</button></div>`;
+[
+  {
+    "id": "gta5",
+    "name": "Grand Theft Auto V",
+    "desc": "Descubra a ousada jornada de Grand Theft Auto V, um jogo revolucionário de mundo aberto repleto de ação, crimes e possibilidades infinitas. Controle três personagens e explore Los Santos em missões intensas e golpes audaciosos.",
+    "price": 21.90,
+    "image": "https://seekkey.store/wp-content/webp-express/webp-images/uploads/2025/01/1000055766-600x900.png.webp"
+  },
+  {
+    "id": "rdr2",
+    "name": "Red Dead Redemption 2: Ultimate Edition",
+    "desc": "Descubra a experiência definitiva com Red Dead Redemption 2: Ultimate Edition, que combina a premiada aventura no Velho Oeste com conteúdos exclusivos para a história. Desfrute de bônus especiais, itens exclusivos e vantagens para expandir sua jornada como foragido no mundo imersivo e implacável do Oeste.",
+    "price": 24.90,
+    "image": "https://seekkey.store/wp-content/webp-express/webp-images/uploads/2025/01/rd2-600x900.png.webp"
+  },
+  {
+    "id": "eafc25",
+    "name": "EA SPORTS FC™ 25",
+    "desc": "O EAFC 25 (EA Sports FC 25) é a nova edição da franquia de futebol da EA Sports, sucedendo a série FIFA. O jogo traz gráficos mais realistas, melhorias na jogabilidade e novos recursos. Inclui modos populares como Ultimate Team, Modo Carreira e Volta Football, além de atualizações em jogadores, ligas e estádios.",
+    "price": 20.00,
+    "image": "https://seekkey.store/wp-content/webp-express/webp-images/uploads/2025/01/1000061147-1-600x900.png.webp"
   }
-  content.innerHTML += `<div style="margin-top:18px;color:var(--muted)"><small>Pagamento simulado — após 'confirmar pagamento' você receberá o código na tela (demo).</small></div>`;
-}
-
-function closeModal(){ document.getElementById('modal').style.display='none'; document.getElementById('modalContent').innerHTML=''; }
-document.addEventListener('click', (e)=>{ if(e.target && e.target.id==='closeModal') closeModal(); });
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
-
-function preview(id){
-  const p = products.find(x=>x.id===id);
-  alert(p.name + '\n\n' + p.desc + '\n\nPreço: R$ ' + p.price.toFixed(2));
-}
-
-function clearCart(){ cart=[]; updateCartCount(); openCart(); }
-
-function checkout(){
-  const total = cart.reduce((s,i)=>s+i.qty*i.price,0);
-  const pixCode = generatePix(total);
-  const content = document.getElementById('modalContent');
-  content.innerHTML = `<h3>Pagamento PIX</h3><p>Copie o código abaixo e simule o pagamento:</p><pre style="background:rgba(0,0,0,0.4);padding:8px;border-radius:8px">${pixCode}</pre><div style="margin-top:12px"><button class="btn" onclick="simulatePayment('${pixCode}')">Simular pagamento (demo)</button></div><div style="margin-top:10px"><small>Ou escaneie (simulação)</small></div>`;
-}
-
-function generatePix(total){
-  const cents = Math.round(total*100).toString().padStart(3,'0');
-  const base = '00020126360014BR.GOV.BCB.PIX0114+55' + Math.floor(100000000 + Math.random()*899999999).toString();
-  return base + '540' + cents;
-}
-
-async function simulatePayment(pix){
-  const content = document.getElementById('modalContent');
-  content.innerHTML = `<h3>Verificando pagamento...</h3><p>Aguarde um momento</p>`;
-  await new Promise(r=>setTimeout(r,2000));
-  let notes = '';
-  cart.forEach(it=>{
-    for(let i=0;i<it.qty;i++){
-      const code = 'LHB-' + it.id.toUpperCase() + '-' + Math.random().toString(36).substring(2,10).toUpperCase();
-      notes += `${it.name}: ${code}\n`;
-    }
-  });
-  content.innerHTML = `<h3>Pagamento confirmado ✅</h3><p>Seu(s) código(s) foram gerados abaixo (copie e guarde):</p><pre style="background:rgba(0,0,0,0.4);padding:8px;border-radius:8px">${notes}</pre><div style="margin-top:12px"><button class="btn" onclick="finishPurchase()">Finalizar</button></div>`;
-  cart = [];
-  updateCartCount();
-}
-
-def finishPurchase(): pass
+]
