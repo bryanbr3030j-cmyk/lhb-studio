@@ -1,14 +1,27 @@
+// ======================
+// app.js completo LHB Studio — Versão Final
+// ======================
+
 const PRODUCTS_URL = 'products.json';
 let products = [];
 let cart = [];
 
-function $(sel){return document.querySelector(sel)}
+function $(sel){ return document.querySelector(sel) }
 
+// ----------------------
+// CARREGAMENTO DE PRODUTOS
+// ----------------------
 async function loadProducts(){
   const res = await fetch(PRODUCTS_URL);
   products = await res.json();
   const grid = $('#grid');
   grid.innerHTML = '';
+  if(products.length === 0){
+    $('#emptyHint').style.display = 'block';
+    return;
+  } else {
+    $('#emptyHint').style.display = 'none';
+  }
   products.forEach(p => {
     const el = document.createElement('article');
     el.className = 'card';
@@ -28,6 +41,9 @@ async function loadProducts(){
   });
 }
 
+// ----------------------
+// CARRINHO
+// ----------------------
 function addToCart(id){
   const p = products.find(x=>x.id===id);
   if(!p) return;
@@ -61,48 +77,100 @@ function openCart(){
     content.innerHTML += `<div style="margin-top:12px;font-weight:800">Total: R$ ${total.toFixed(2)}</div>`;
     content.innerHTML += `<div style="margin-top:12px"><button class="btn" onclick="checkout()">Pagar com PIX</button> <button class="small" onclick="clearCart()">Limpar</button></div>`;
   }
-  content.innerHTML += `<div style="margin-top:18px;color:var(--muted)"><small>Pagamento simulado — após 'confirmar pagamento' você receberá o código na tela (demo).</small></div>`;
 }
 
-function closeModal(){ $('#modal').style.display='none'; $('#modalContent').innerHTML=''; }
-document.addEventListener('click', (e)=>{ if(e.target && e.target.id==='closeModal') closeModal(); });
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+function clearCart(){ cart=[]; updateCartCount(); openCart(); }
 
 function preview(id){
   const p = products.find(x=>x.id===id);
   alert(p.name + '\n\n' + p.desc + '\n\nPreço: R$ ' + p.price.toFixed(2));
 }
 
-function clearCart(){ cart=[]; updateCartCount(); openCart(); }
+function closeModal(){ $('#modal').style.display='none'; $('#modalContent').innerHTML=''; }
+document.addEventListener('click', (e)=>{ if(e.target && e.target.id==='closeModal') closeModal(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
 
-function checkout(){
-  const total = cart.reduce((s,i)=>s+i.qty*i.price,0);
-  const pixCode = generatePix(total);
+// ----------------------
+// CHECKOUT COM PIX REAL E QR RESPONSIVO
+// ----------------------
+async function checkout(){
+  const totalCents = Math.round(cart.reduce((s,i)=>s+i.qty*i.price,0)*100);
+  const totalDisplay = (totalCents/100).toFixed(2);
+
+  const myPhonePix = '5519971055502'; 
+  const myPixKey = '4b13b07b-59a8-41a5-8f41-eeddd91ba739';
+  const merchantName = 'LHB Studio';
+  const merchantCity = 'Limeira';
+
+  const payload = `00020126360014BR.GOV.BCB.PIX0114+55${myPhonePix}520400005303986540${totalCents.toString().padStart(3,'0')}5802BR59${merchantName.length}${merchantName}6009${merchantCity}6108054090006304`;
+
   const content = $('#modalContent');
-  content.innerHTML = `<h3>Pagamento PIX</h3><p>Copie o código abaixo e simule o pagamento:</p><pre style="background:rgba(0,0,0,0.4);padding:8px;border-radius:8px">${pixCode}</pre><div style="margin-top:12px"><button class="btn" onclick="simulatePayment('${pixCode}')">Simular pagamento (demo)</button></div><div style="margin-top:10px"><small>Ou escaneie (simulação)</small></div>`;
-}
+  content.innerHTML = `
+    <h3>Pagamento PIX</h3>
+    <p>Valor: <strong>R$ ${totalDisplay}</strong></p>
+    <p>Chave PIX (UUID): <br><code>${myPixKey}</code></p>
+    <p>Chave PIX (celular): <br><strong>+55 ${formatPhoneForDisplay(myPhonePix)}</strong></p>
+    <div id="qrWrap" style="margin:20px auto;text-align:center"></div>
+    <pre style="background:rgba(0,0,0,0.06);padding:10px;border-radius:6px;white-space:pre-wrap">${payload}</pre>
 
-function generatePix(total){
-  const cents = Math.round(total*100).toString().padStart(3,'0');
-  const base = '00020126360014BR.GOV.BCB.PIX0114+55' + Math.floor(100000000 + Math.random()*899999999).toString();
-  return base + '540' + cents;
-}
+    <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <label class="btn" style="cursor:pointer">
+        <input id="fileProof" type="file" accept="image/*,application/pdf" style="display:none">
+        Enviar comprovante
+      </label>
+      <a class="btn" href="https://wa.me/55${myPhonePix}?text=${encodeURIComponent(`Olá, eu paguei R$ ${totalDisplay} por *${merchantName}*. Segue o comprovante:`)}" target="_blank">Enviar por WhatsApp</a>
+      <button class="small" onclick="closeModal()">Cancelar</button>
+    </div>
 
-async function simulatePayment(pix){
-  const content = $('#modalContent');
-  content.innerHTML = `<h3>Verificando pagamento...</h3><p>Aguarde um momento</p>`;
-  await new Promise(r=>setTimeout(r,2000));
-  let notes = '';
-  cart.forEach(it=>{
-    for(let i=0;i<it.qty;i++){
-      const code = 'LHB-' + it.id.toUpperCase() + '-' + Math.random().toString(36).substring(2,10).toUpperCase();
-      notes += `${it.name}: ${code}\n`;
+    <div style="margin-top:12px;color:var(--muted);text-align:center">
+      <small>Após receber o comprovante, confirmaremos manualmente seu pedido.</small>
+    </div>
+  `;
+
+  const qrWrap = document.getElementById('qrWrap');
+  const qrUrl = `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encodeURIComponent(payload)}`;
+  qrWrap.innerHTML = `<img src="${qrUrl}" alt="QR Code PIX" style="width:220px;height:220px;object-fit:contain;border-radius:12px">`;
+
+  const fileInput = document.getElementById('fileProof');
+  fileInput.addEventListener('change', async (e)=>{
+    const file = e.target.files[0];
+    if(!file) return alert('Nenhum arquivo selecionado.');
+    qrWrap.innerHTML += '<div style="margin-top:8px">Enviando comprovante...</div>';
+    const form = new FormData();
+    form.append('proof', file);
+    form.append('amount', totalCents);
+    form.append('payload', payload);
+    form.append('pix_key', myPixKey);
+
+    try {
+      const resp = await fetch('/upload-proof', { method: 'POST', body: form });
+      if(resp.ok){
+        alert('Comprovante enviado! Em breve confirmaremos seu pedido.');
+        closeModal();
+      } else {
+        const text = await resp.text();
+        alert('Falha ao enviar comprovante: ' + text);
+      }
+    } catch(err){
+      console.error(err);
+      alert('Erro ao enviar comprovante. Tente pelo WhatsApp.');
     }
   });
-  content.innerHTML = `<h3>Pagamento confirmado ✅</h3><p>Seu(s) código(s) foram gerados abaixo (copie e guarde):</p><pre style="background:rgba(0,0,0,0.4);padding:8px;border-radius:8px">${notes}</pre><div style="margin-top:12px"><button class="btn" onclick="finishPurchase()">Finalizar</button></div>`;
-  cart = [];
-  updateCartCount();
+}
+
+function formatPhoneForDisplay(num){
+  const s = (num || '').replace(/\D/g,'');
+  if(s.length===13 && s.startsWith('55')){
+    const ddd = s.slice(2,4);
+    const rest = s.slice(4);
+    return `(${ddd}) ${rest.slice(0,5)}-${rest.slice(5)}`;
+  }
+  return num;
 }
 
 function finishPurchase(){ closeModal(); }
 
+// ----------------------
+// EXECUTA O CARREGAMENTO INICIAL
+// ----------------------
+document.addEventListener('DOMContentLoaded', ()=>{ loadProducts(); });
