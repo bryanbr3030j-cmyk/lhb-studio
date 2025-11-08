@@ -1,94 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LHB Studio — Loja Digital</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LHB Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body { margin: 0; font-family: 'Orbitron', sans-serif; background: #0d0d0d; color: #fff; }
+header { background: #1a1a1a; padding: 20px; text-align: center; font-size: 2rem; color: #ff0055; text-shadow: 0 0 10px #ff0055; }
+nav { text-align: center; margin: 20px 0; }
+nav a { color: #00ffcc; text-decoration: none; margin: 0 15px; font-weight: bold; transition: color 0.2s; }
+nav a:hover { color: #ff0055; }
+main { text-align: center; padding: 40px 20px; font-size: 1.1rem; }
+</style>
 </head>
 <body>
-  <div class="glow-bg"></div>
-  <header class="header">
-    <div class="container header-inner">
-      <div class="brand">
-        <div class="logo">LHB<span>Studio</span></div>
-        <div class="tag">Digital marketplace</div>
-      </div>
-      <nav class="nav">
-      <a href="produtos.html" class="btn">Ver produtos</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#contato">Contato</a>
-        <button id="cartBtn" class="cart-btn">Carrinho <span id="cartCount">0</span></button>
-      </nav>
-    </div>
-  </header>
-
-  <main class="main">
-    <section class="hero" id="hero">
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <h1>Seus Jogos e Produtos Digitais em um Só Lugar</h1>
-          <p>Jogos, gift cards, contas preparadas (nitro, jogos), cursos e ferramentas — entrega imediata para produtos digitais.</p>
-          <div class="hero-cta">
-            <a href="#produtos" class="btn">Ver produtos</a>
-            <a href="#" id="howItWorks" class="btn btn-ghost">Como funciona</a>
-          </div>
-        </div>
-        <div class="hero-art">
-          <div class="art-card">
-            <img src="banner.png" alt="Banner LHB Studio" style="width:100%;height:100%;object-fit:cover;border-radius:12px">
-            <div class="badge">Promo</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="produtos" class="section produtos">
-      <div class="container">
-        <h2>Produtos</h2>
-        <div id="grid" class="grid"></div>
-      </div>
-    </section>
-
-    <section id="sobre" class="section alt">
-      <div class="container">
-        <h2>Sobre</h2>
-        <p>Sobre a LHB StudioA LHB Studio é uma loja digital focada em jogadores e usuários de produtos digitais. Oferecemos contas prontas, chaves de jogos, Nitro, gift cards, cursos e licenças com entrega imediata após a confirmação do pagamento. Utilizamos processos automatizados para fornecer acesso rápido e seguro aos produtos — priorizando confiabilidade, privacidade e suporte claro ao cliente. </p>
-      </div>
-    </section>
-
-    <section id="contato" class="section">
-      <div class="container">
-        <h2>Contato</h2>
-        <p>Prefere falar direto? Use o WhatsApp no rodapé ou deixe uma mensagem:</p>
-        <form id="contactForm">
-          <input type="text" name="nome" placeholder="Seu nome" required>
-          <input type="email" name="email" placeholder="Seu email" required>
-          <textarea name="mensagem" placeholder="Mensagem" required></textarea>
-          <button class="btn" type="submit">Enviar</button>
-        </form>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>© 2025 LHB Studio</div>
-      <div class="footer-right">
-        <a href="https://wa.me/5591999999999" target="_blank" class="btn-ghost">WhatsApp</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- CART / MODAL -->
-  <div id="modal" class="modal" aria-hidden="true">
-    <div class="modal-panel">
-      <button id="closeModal" class="modal-close">×</button>
-      <div id="modalContent"></div>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
+<header>LHB Studio</header>
+<nav>
+<a href="index.html">Início</a>
+<a href="produtos.html">Produtos</a>
+<a href="sobre.html">Sobre</a>
+</nav>
+<main>
+<h1>Bem-vindo ao LHB Studio!</h1>
+<p>Oferecemos produtos digitais com entrega imediata após confirmação de pagamento via PIX. Explore nossos lançamentos e descubra conteúdos exclusivos para gamers.</p>
+<p>Clique em <strong>Produtos</strong> no menu acima para conhecer nossa loja.</p>
+</main>
 </body>
 </html>
