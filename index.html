@@ -3,74 +3,92 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LHB Studio - Loja Digital</title>
+  <title>LHB Studio — Loja Digital</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
+  <div class="glow-bg"></div>
+  <header class="header">
     <div class="container header-inner">
-      <h1 class="logo">LHB Studio</h1>
+      <div class="brand">
+        <div class="logo">LHB<span>Studio</span></div>
+        <div class="tag">Digital marketplace</div>
+      </div>
       <nav class="nav">
         <a href="#produtos">Produtos</a>
         <a href="#sobre">Sobre</a>
         <a href="#contato">Contato</a>
+        <button id="cartBtn" class="cart-btn">Carrinho <span id="cartCount">0</span></button>
       </nav>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
+  <main class="main">
+    <section class="hero" id="hero">
       <div class="container hero-inner">
         <div class="hero-text">
-          <h2>Jogos digitais e códigos — entrega por e-mail</h2>
-          <p>Promoções da semana — compre via Pix e receba automaticamente por e-mail quando o pagamento for confirmado.</p>
-          <a class="btn" href="#produtos">Ver produtos</a>
+          <h1>Seus Jogos e Produtos Digitais em um Só Lugar</h1>
+          <p>Jogos, gift cards, contas preparadas (nitro, jogos), cursos e ferramentas — entrega imediata para produtos digitais.</p>
+          <div class="hero-cta">
+            <a href="#produtos" class="btn">Ver produtos</a>
+            <a href="#" id="howItWorks" class="btn btn-ghost">Como funciona</a>
+          </div>
         </div>
-        <div class="hero-image" aria-hidden="true">
-          <div class="placeholder">BANNER: Promoções da Semana</div>
+        <div class="hero-art">
+          <div class="art-card">
+            <img src="banner.png" alt="Banner LHB Studio" style="width:100%;height:100%;object-fit:cover;border-radius:12px">
+            <div class="badge">Promo</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="produtos" class="section container">
-      <h3>Produtos em destaque</h3>
-      <div id="grid" class="grid"></div>
+    <section id="produtos" class="section produtos">
+      <div class="container">
+        <h2>Produtos</h2>
+        <div id="grid" class="grid"></div>
+      </div>
     </section>
 
     <section id="sobre" class="section alt">
       <div class="container">
-        <h3>Sobre</h3>
-        <p>Lojas digitais focadas em jogos, recargas e códigos com entrega automática por Pix (integração via PSP recomendada).</p>
+        <h2>Sobre</h2>
+        <p>LHB Studio vende produtos digitais com entrega imediata após confirmação de pagamento. Pagamento via PIX (simulado) — ideal para testes e demonstrações.</p>
       </div>
     </section>
 
-    <section id="contato" class="section container">
-      <h3>Contato</h3>
-      <p>Tem dúvidas? Envie uma mensagem.</p>
-      <form id="contactForm">
-        <input type="text" name="nome" placeholder="Seu nome" required>
-        <input type="email" name="email" placeholder="Seu email (opcional)">
-        <textarea name="mensagem" placeholder="Mensagem" required></textarea>
-        <button type="submit" class="btn">Enviar</button>
-      </form>
-      <p class="muted">Email de contato: <span id="contactEmail">seuemail@exemplo.com</span></p>
+    <section id="contato" class="section">
+      <div class="container">
+        <h2>Contato</h2>
+        <p>Prefere falar direto? Use o WhatsApp no rodapé ou deixe uma mensagem:</p>
+        <form id="contactForm">
+          <input type="text" name="nome" placeholder="Seu nome" required>
+          <input type="email" name="email" placeholder="Seu email" required>
+          <textarea name="mensagem" placeholder="Mensagem" required></textarea>
+          <button class="btn" type="submit">Enviar</button>
+        </form>
+      </div>
     </section>
+
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 LHB Studio.</p>
+    <div class="container footer-inner">
+      <div>© 2025 LHB Studio</div>
+      <div class="footer-right">
+        <a href="https://wa.me/5591999999999" target="_blank" class="btn-ghost">WhatsApp</a>
+      </div>
     </div>
   </footer>
 
-  <div id="pixModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); align-items:center; justify-content:center;">
-    <div style="background:#0b0d10; padding:18px; border-radius:10px; max-width:540px; color:#fff;">
-      <h3>Pagamento Pix</h3>
-      <div id="pixContent"></div>
-      <button onclick="closeModal()" class="btn" style="margin-top:12px;">Fechar</button>
+  <!-- CART / MODAL -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-panel">
+      <button id="closeModal" class="modal-close">×</button>
+      <div id="modalContent"></div>
     </div>
   </div>
 
-  <script src="client.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

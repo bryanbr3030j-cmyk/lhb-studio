@@ -2,19 +2,49 @@
   {
     "id": "gta5",
     "name": "GTA V PC",
-    "desc": "Grand Theft Auto V - Código digital para PC",
+    "desc": "Grand Theft Auto V — Código digital para PC (Steam/Key)",
     "price": 21.9
   },
   {
     "id": "fc25",
     "name": "FC 25",
-    "desc": "Gift Card FC 25 - Código digital",
+    "desc": "Gift Card / Crédito FC 25 — Código digital",
     "price": 20.0
   },
   {
     "id": "rdr",
-    "name": "RED DEAD REDEMPTION",
-    "desc": "Red Dead Redemption - Código digital para PC",
+    "name": "Red Dead Redemption",
+    "desc": "Red Dead Redemption — Código digital para PC",
     "price": 24.9
+  },
+  {
+    "id": "nitrolink",
+    "name": "Nitro Link 1 mês",
+    "desc": "Link de resgate Nitro — 1 mês de Nitro",
+    "price": 9.9
+  },
+  {
+    "id": "giftnitro",
+    "name": "Gift Nitro",
+    "desc": "Gift Nitro — resgate por link ou código",
+    "price": 12.9
+  },
+  {
+    "id": "account_game",
+    "name": "Conta Nitrada (jogo)",
+    "desc": "Conta com jogos e Nitro ativa (entrega por mensagem segura)",
+    "price": 29.9
+  },
+  {
+    "id": "devtool",
+    "name": "DevTool Pro",
+    "desc": "Licença digital — ferramenta de produtividade para devs",
+    "price": 39.9
+  },
+  {
+    "id": "courseAI",
+    "name": "Curso IA Básico",
+    "desc": "Acesso ao curso online de introdução a IA — entrega por link",
+    "price": 29.9
   }
 ]
