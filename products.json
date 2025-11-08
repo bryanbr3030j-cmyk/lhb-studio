@@ -1,50 +1,23 @@
 [
   {
     "id": "gta5",
-    "name": "GTA V PC",
-    "desc": "Grand Theft Auto V — Código digital para PC (Steam/Key)",
-    "price": 21.9
+    "name": "Grand Theft Auto V",
+    "desc": "Descubra a ousada jornada de Grand Theft Auto V, um jogo revolucionário de mundo aberto repleto de ação, crimes e possibilidades infinitas. Controle três personagens e explore Los Santos em missões intensas e golpes audaciosos.",
+    "price": 21.90,
+    "image": "https://seekkey.store/wp-content/webp-express/webp-images/uploads/2025/01/1000055766-600x900.png.webp"
   },
   {
-    "id": "fc25",
-    "name": "FC 25",
-    "desc": "Gift Card / Crédito FC 25 — Código digital",
-    "price": 20.0
+    "id": "rdr2_ultimate",
+    "name": "Red Dead Redemption 2: Ultimate Edition",
+    "desc": "Descubra a experiência definitiva com Red Dead Redemption 2: Ultimate Edition, que combina a premiada aventura no Velho Oeste com conteúdos exclusivos para a história. Desfrute de bônus especiais, itens exclusivos e vantagens para expandir sua jornada como foragido no mundo imersivo e implacável do Oeste.",
+    "price": 24.90,
+    "image": "https://seekkey.store/wp-content/webp-express/webp-images/uploads/2025/01/rd2-600x900.png.webp"
   },
   {
-    "id": "rdr",
-    "name": "Red Dead Redemption",
-    "desc": "Red Dead Redemption — Código digital para PC",
-    "price": 24.9
-  },
-  {
-    "id": "nitrolink",
-    "name": "Nitro Link 1 mês",
-    "desc": "Link de resgate Nitro — 1 mês de Nitro",
-    "price": 9.9
-  },
-  {
-    "id": "giftnitro",
-    "name": "Gift Nitro",
-    "desc": "Gift Nitro — resgate por link ou código",
-    "price": 12.9
-  },
-  {
-    "id": "account_game",
-    "name": "Conta Nitrada (jogo)",
-    "desc": "Conta com jogos e Nitro ativa (entrega por mensagem segura)",
-    "price": 29.9
-  },
-  {
-    "id": "devtool",
-    "name": "DevTool Pro",
-    "desc": "Licença digital — ferramenta de produtividade para devs",
-    "price": 39.9
-  },
-  {
-    "id": "courseAI",
-    "name": "Curso IA Básico",
-    "desc": "Acesso ao curso online de introdução a IA — entrega por link",
-    "price": 29.9
+    "id": "eafc25",
+    "name": "EA SPORTS FC™ 25",
+    "desc": "O EAFC 25 (EA Sports FC 25) é a nova edição da franquia de futebol da EA Sports, sucedendo a série FIFA. O jogo traz gráficos mais realistas, melhorias na jogabilidade e novos recursos. Inclui modos populares como Ultimate Team, Modo Carreira e Volta Football, além de atualizações em jogadores, ligas e estádios.",
+    "price": 20.00,
+    "image": "https://seekkey.store/wp-content/webp-express/webp-images/uploads/2025/01/1000061147-1-600x900.png.webp"
   }
 ]
