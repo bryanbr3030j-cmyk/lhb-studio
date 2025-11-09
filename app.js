@@ -1,3 +1,37 @@
+// carregar produtos e inicializar UI
+async function loadProducts() {
+  try {
+    const res = await fetch(PRODUCTS_URL);
+    products = await res.json();
+  } catch (e) {
+    console.error('Erro ao carregar products.json', e);
+    products = [];
+  }
+
+  // Inicializa botões e exibe todos os produtos
+  initCategoryButtons();
+  renderProducts('all');
+}
+
+// categorias (botões)
+function initCategoryButtons() {
+  const buttons = document.querySelectorAll('.cat-btn');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      buttons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const category = button.dataset.cat;
+      const filtered =
+        category === 'all'
+          ? products
+          : products.filter(p => (p.category || '').toLowerCase() === category);
+
+      renderProducts(category);
+    });
+  });
+}
 // ======================
 // app.js — LHB Studio (categorias + carrinho + checkout PIX real)
 // ======================
