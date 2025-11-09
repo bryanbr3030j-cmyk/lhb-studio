@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const productList = document.getElementById("product-list");
   const categoryButtons = document.querySelectorAll(".category-btn");
+  let allProducts = [];
 
   async function loadProducts() {
     try {
       const response = await fetch("products.json");
-      const products = await response.json();
-      displayProducts(products);
-      setupCategoryFilter(products);
+      allProducts = await response.json();
+      displayProducts(allProducts);
     } catch (error) {
       console.error("Erro ao carregar produtos:", error);
     }
@@ -30,4 +30,31 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3>${product.name}</h3>
         <p>${product.desc}</p>
         <span class="price">R$ ${product.price.toFixed(2)}</span>
-        <button class="buy-btn" da
+        <button class="buy-btn">Comprar</button>
+      `;
+
+      productList.appendChild(card);
+    });
+  }
+
+  // filtro por categoria
+  categoryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const category = button.getAttribute("data-category");
+
+      categoryButtons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      if (category === "all") {
+        displayProducts(allProducts);
+      } else {
+        const filtered = allProducts.filter(
+          (p) => p.category && p.category.toLowerCase() === category.toLowerCase()
+        );
+        displayProducts(filtered);
+      }
+    });
+  });
+
+  loadProducts();
+});
