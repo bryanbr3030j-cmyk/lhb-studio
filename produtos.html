@@ -1,65 +1,193 @@
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Produtos — LHB Studio</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LHB Studio - Produtos</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Fundo escuro com brilho neon */
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Container principal */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        /* Títulos */
+        h1, h2, h3 {
+            color: #00f0ff;
+            text-shadow: 0 0 8px #00f0ff, 0 0 16px #00f0ff;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Produtos */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Card do produto */
+        .product-card {
+            background-color: #1a1a1a;
+            border: 2px solid #00f0ff;
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px #00f0ff;
+        }
+
+        /* Imagem do produto */
+        .product-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        /* Nome do produto */
+        .product-card h3 {
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Preço do produto */
+        .product-card p {
+            color: #00f0ff;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        /* Botão Comprar */
+        .product-card button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card button:hover {
+            background-color: #00f0ff;
+            box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+        }
+
+        /* Responsividade */
+        @media screen and (max-width: 768px) {
+            .products {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .product-card img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .product-card h3 {
+                font-size: 1rem;
+            }
+
+            .product-card button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Rodapé */
+        footer {
+            margin-top: 3rem;
+            padding: 2rem 0;
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Links e hover geral */
+        a {
+            color: #00f0ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #007bff;
+        }
+    </style>
 </head>
 <body>
-  <div class="glow-bg"></div>
+    <header>
+        <div class="container">
+            <h1>LHB Studio</h1>
+            <p style="text-align:center; color:#888;">Produtos digitais com entrega imediata após confirmação de pagamento.</p>
+        </div>
+    </header>
 
-  <header class="header">
-    <div class="container header-inner">
-      <div class="brand">
-        <a class="logo" href="index.html">LHB<span>Studio</span></a>
-        <div class="tag">LHB Studio — Produtos Digitais</div>
-      </div>
-      <nav class="nav">
-        <a href="index.html">Início</a>
-        <a href="produtos.html" aria-current="page">Produtos</a>
-        <a href="sobre.html">Sobre</a>
-        <button id="cartBtn" class="cart-btn" aria-label="Abrir carrinho">Carrinho <span id="cartCount">0</span></button>
-      </nav>
-    </div>
-  </header>
+    <main class="container">
+        <section class="products">
+            <!-- Produto 1 -->
+            <div class="product-card">
+                <img src="images/produto1.jpg" alt="Produto 1">
+                <h3>Produto 1</h3>
+                <p>R$ 49,90</p>
+                <button onclick="alert('Pagamento PIX simulado para Produto 1!')">Comprar</button>
+            </div>
 
-  <main class="main">
-    <section class="products-section container">
-      <div class="categories" role="tablist" aria-label="Categorias de produtos">
-        <button class="cat-btn active" data-cat="all">Tudo</button>
-        <button class="cat-btn" data-cat="jogos">Jogos</button>
-        <button class="cat-btn" data-cat="discord">Discord</button>
-        <button class="cat-btn" data-cat="packs">Packs</button>
-        <button class="cat-btn" data-cat="metodos">Métodos</button>
-        <button class="cat-btn" data-cat="assinaturas">Assinaturas</button>
-      </div>
+            <!-- Produto 2 -->
+            <div class="product-card">
+                <img src="images/produto2.jpg" alt="Produto 2">
+                <h3>Produto 2</h3>
+                <p>R$ 79,90</p>
+                <button onclick="alert('Pagamento PIX simulado para Produto 2!')">Comprar</button>
+            </div>
 
-      <div id="grid" class="grid" aria-live="polite"></div>
-      <div id="emptyHint" class="empty-hint" style="display:none">Nenhum produto encontrado nessa categoria.</div>
-    </section>
-  </main>
+            <!-- Produto 3 -->
+            <div class="product-card">
+                <img src="images/produto3.jpg" alt="Produto 3">
+                <h3>Produto 3</h3>
+                <p>R$ 99,90</p>
+                <button onclick="alert('Pagamento PIX simulado para Produto 3!')">Comprar</button>
+            </div>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div>© <span id="year"></span> LHB Studio</div>
-      <div class="footer-right">
-        <a class="btn-ghost" href="https://wa.me/5519971055502" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="btn-ghost" href="mailto:lhbstudioss@gmail.com">lhbstudioss@gmail.com</a>
-      </div>
-    </div>
-  </footer>
+            <!-- Produto 4 -->
+            <div class="product-card">
+                <img src="images/produto4.jpg" alt="Produto 4">
+                <h3>Produto 4</h3>
+                <p>R$ 129,90</p>
+                <button onclick="alert('Pagamento PIX simulado para Produto 4!')">Comprar</button>
+            </div>
+        </section>
+    </main>
 
-  <!-- Modal -->
-  <div id="modal" class="modal" aria-hidden="true">
-    <div class="modal-panel">
-      <button id="closeModal" class="modal-close" aria-label="Fechar">×</button>
-      <div id="modalContent"></div>
-    </div>
-  </div>
-
-  <script src="app.js" defer></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    <footer>
+        <p>&copy; 2025 LHB Studio. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
-
