@@ -8,50 +8,58 @@
 </head>
 <body>
   <div class="glow-bg"></div>
+
   <header class="header">
     <div class="container header-inner">
       <div class="brand">
-        <div class="logo"><a href="index.html" style="color:inherit;text-decoration:none">LHB<span>Studio</span></a></div>
-        <div class="tag">Digital marketplace</div>
+        <a class="logo" href="index.html">LHB<span>Studio</span></a>
+        <div class="tag">LHB Studio — Produtos Digitais</div>
       </div>
       <nav class="nav">
         <a href="index.html">Início</a>
         <a href="produtos.html" aria-current="page">Produtos</a>
-        <a href="index.html#contato">Contato</a>
-        <button id="cartBtn" class="cart-btn">Carrinho <span id="cartCount">0</span></button>
+        <a href="sobre.html">Sobre</a>
+        <button id="cartBtn" class="cart-btn" aria-label="Abrir carrinho">Carrinho <span id="cartCount">0</span></button>
       </nav>
     </div>
   </header>
 
   <main class="main">
-    <section class="section produtos" style="padding-top:36px">
-      <div class="container">
-        <h2>Produtos Disponíveis</h2>
-        <div id="grid" class="grid" aria-live="polite"></div>
-        <div id="emptyHint" style="color:var(--muted);margin-top:14px;display:none">Nenhum produto encontrado.</div>
+    <section class="products-section container">
+      <div class="categories" role="tablist" aria-label="Categorias de produtos">
+        <button class="cat-btn active" data-cat="all">Tudo</button>
+        <button class="cat-btn" data-cat="jogos">Jogos</button>
+        <button class="cat-btn" data-cat="discord">Discord</button>
+        <button class="cat-btn" data-cat="packs">Packs</button>
+        <button class="cat-btn" data-cat="metodos">Métodos</button>
+        <button class="cat-btn" data-cat="assinaturas">Assinaturas</button>
       </div>
+
+      <div id="grid" class="grid" aria-live="polite"></div>
+      <div id="emptyHint" class="empty-hint" style="display:none">Nenhum produto encontrado nessa categoria.</div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div>© 2025 LHB Studio</div>
+      <div>© <span id="year"></span> LHB Studio</div>
       <div class="footer-right">
-        <a href="https://wa.me/5591999999999" target="_blank" class="btn-ghost">WhatsApp</a>
+        <a class="btn-ghost" href="https://wa.me/5519971055502" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn-ghost" href="mailto:lhbstudioss@gmail.com">lhbstudioss@gmail.com</a>
       </div>
     </div>
   </footer>
 
+  <!-- Modal -->
   <div id="modal" class="modal" aria-hidden="true">
     <div class="modal-panel">
-      <button id="closeModal" class="modal-close">×</button>
+      <button id="closeModal" class="modal-close" aria-label="Fechar">×</button>
       <div id="modalContent"></div>
     </div>
   </div>
 
-  <script src="app.js"></script>
-  <script>
-    if (typeof loadProducts === 'function') loadProducts();
-  </script>
+  <script src="app.js" defer></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
+
