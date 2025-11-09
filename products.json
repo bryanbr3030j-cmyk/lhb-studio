@@ -23,9 +23,4 @@
     "image": "https://seekkey.store/wp-content/webp-express/webp-images/uploads/2025/01/1000061147-1-600x900.png.webp",
     "category": "jogos"
   }
-
-  /* Você pode adicionar outros produtos aqui com os campos:
-    id, name, desc, price, image, category
-     Ex: category: "discord" ou "packs" ou "metodos" ou "assinaturas"
-  */
 ]
