@@ -44,7 +44,7 @@ nav a:hover {
 
 .intro {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem;
   background: linear-gradient(180deg, #000, #111);
 }
 
@@ -58,23 +58,6 @@ nav a:hover {
 .intro p {
   font-size: 1.1rem;
   margin-bottom: 2rem;
-}
-
-.btn-primary {
-  background-color: #00f0ff;
-  color: #0d0d0d;
-  padding: 0.8rem 2rem;
-  border: none;
-  border-radius: 12px;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-
-.btn-primary:hover {
-  box-shadow: 0 0 20px #00f0ff;
-  transform: scale(1.05);
 }
 
 .produtos-grid {
